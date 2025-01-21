@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3e5df27297f69846a54447c99736b64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  idx: 0
   frontImage: {fileID: 2098159016973419047}
   front: {fileID: 1891192335134065023}
   back: {fileID: 7806942991377525750}
@@ -87,7 +88,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6159281909540548163
 Transform:
   m_ObjectHideFlags: 0
