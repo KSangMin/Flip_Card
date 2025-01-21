@@ -13,9 +13,13 @@ public class Card : MonoBehaviour
 
     private Animator _anim;
 
+    private AudioSource _audioSource;
+    public AudioClip clip;
+
     void Start()
     {
         _anim  = GetComponent<Animator>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -31,6 +35,12 @@ public class Card : MonoBehaviour
 
     public void FlipCard()
     {
+        if (GameManager.Instance.second != null)
+        {
+            return;
+        }
+
+        _audioSource.PlayOneShot(clip);
         front.SetActive(true);
         back.SetActive(false);
         _anim.SetBool("isOpen", true);
@@ -48,7 +58,7 @@ public class Card : MonoBehaviour
 
     public void InvokeDestroy()
     {
-        Invoke("DestroyCard", 1f);
+        Invoke("DestroyCard", 0.5f);
     }
 
     public void DestroyCard()
@@ -58,7 +68,7 @@ public class Card : MonoBehaviour
 
     public void InvokeClose()
     {
-        Invoke("CloseCard", 1f);
+        Invoke("CloseCard", 0.5f);
     }
 
     public void CloseCard()
