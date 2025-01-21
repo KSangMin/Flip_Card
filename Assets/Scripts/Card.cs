@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Card : MonoBehaviour
 {
-    private int _idx = 0;
+    public int idx = 0;
 
     public SpriteRenderer frontImage;
 
@@ -24,9 +24,9 @@ public class Card : MonoBehaviour
     }
 
     public void SetCard(int id)
-    { 
-        _idx = id;
-        frontImage.sprite = Resources.Load<Sprite>($"Sprites/rtan{_idx}");
+    {
+        idx = id;
+        frontImage.sprite = Resources.Load<Sprite>($"Sprites/rtan{idx}");
     }
 
     public void FlipCard()
@@ -34,5 +34,37 @@ public class Card : MonoBehaviour
         front.SetActive(true);
         back.SetActive(false);
         _anim.SetBool("isOpen", true);
+
+        if(GameManager.Instance.first == null)
+        {
+            GameManager.Instance.first = this;
+        }
+        else
+        {
+            GameManager.Instance.second = this;
+            GameManager.Instance.MatchCard();
+        }
+    }
+
+    public void InvokeDestroy()
+    {
+        Invoke("DestroyCard", 1f);
+    }
+
+    public void DestroyCard()
+    {
+        Destroy(gameObject);
+    }
+
+    public void InvokeClose()
+    {
+        Invoke("CloseCard", 1f);
+    }
+
+    public void CloseCard()
+    {
+        front.SetActive(false);
+        back.SetActive(true);
+        _anim.SetBool("isOpen", false);
     }
 }

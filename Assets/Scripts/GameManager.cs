@@ -9,6 +9,9 @@ public class GameManager : MonoBehaviour
 
     private float _time = 0;
     public Text timeText;
+
+    public Card first;
+    public Card second;
     private void Awake()
     {
         if(Instance == null)
@@ -26,5 +29,22 @@ public class GameManager : MonoBehaviour
     {
         _time += Time.deltaTime;
         timeText.text = _time.ToString("N1");
+    }
+
+    public void MatchCard()
+    {
+        if(first.idx == second.idx)
+        {
+            first.InvokeDestroy();
+            second.InvokeDestroy();
+        }
+        else
+        {
+            first.InvokeClose();
+            second.InvokeClose();
+        }
+
+        first = null;
+        second = null;
     }
 }
