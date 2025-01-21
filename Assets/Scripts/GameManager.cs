@@ -35,6 +35,11 @@ public class GameManager : MonoBehaviour
     {
         _time += Time.deltaTime;
         timeText.text = _time.ToString("N1");
+
+        if(_time >= 30f)
+        {
+            GameOver();
+        }
     }
 
     public void MatchCard()
@@ -46,8 +51,7 @@ public class GameManager : MonoBehaviour
             CardCount -= 2;
             if(CardCount <= 0)
             {
-                endText.SetActive(true);
-                Time.timeScale = 0f;
+                GameOver();
             }
         }
         else
@@ -58,5 +62,11 @@ public class GameManager : MonoBehaviour
 
         first = null;
         second = null;
+    }
+
+    public void GameOver()
+    {
+        endText.SetActive(true);
+        Time.timeScale = 0f;
     }
 }
