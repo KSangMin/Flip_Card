@@ -6,11 +6,16 @@ public class Card : MonoBehaviour
 {
     private int _idx = 0;
 
-    public SpriteRenderer front;
+    public SpriteRenderer frontImage;
+
+    public GameObject front;
+    public GameObject back;
+
+    private Animator _anim;
 
     void Start()
     {
-        
+        _anim  = GetComponent<Animator>();
     }
 
     void Update()
@@ -19,8 +24,15 @@ public class Card : MonoBehaviour
     }
 
     public void SetCard(int id)
-    {
+    { 
         _idx = id;
-        front.sprite = Resources.Load<Sprite>($"Sprites/rtan{_idx}");
+        frontImage.sprite = Resources.Load<Sprite>($"Sprites/rtan{_idx}");
+    }
+
+    public void FlipCard()
+    {
+        front.SetActive(true);
+        back.SetActive(false);
+        _anim.SetBool("isOpen", true);
     }
 }
