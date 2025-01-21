@@ -21,6 +21,8 @@ public class Board : MonoBehaviour
             go.transform.position = new Vector3(x, y, 0);
             go.GetComponent<Card>().SetCard(arr[i]);
         }
+
+        GameManager.Instance.CardCount = arr.Length;
     }
 
     void Update()

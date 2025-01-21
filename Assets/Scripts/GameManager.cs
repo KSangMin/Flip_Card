@@ -12,12 +12,18 @@ public class GameManager : MonoBehaviour
 
     public Card first;
     public Card second;
+
+    public int CardCount = 0;
+
+    public GameObject endText;
+
     private void Awake()
     {
         if(Instance == null)
         {
             Instance = this;
         }
+        Time.timeScale = 1f;
     }
 
     void Start()
@@ -37,6 +43,12 @@ public class GameManager : MonoBehaviour
         {
             first.InvokeDestroy();
             second.InvokeDestroy();
+            CardCount -= 2;
+            if(CardCount <= 0)
+            {
+                endText.SetActive(true);
+                Time.timeScale = 0f;
+            }
         }
         else
         {
